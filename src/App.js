@@ -7,6 +7,7 @@ import { User } from './user/components/User';
 import { MainNavigation } from './shared/components/Navigation/MainNavigation';
 import { UserPlaces } from './places/pages/UserPlaces';
 import { UpdatePlace } from './places/pages/UpdatePlace';
+import { UserAuth } from './user/pages/UserAuth';
 function App() {
   return <Router>
     <MainNavigation/>
@@ -18,6 +19,7 @@ function App() {
 <Route exact path='/:userid/places' Component={UserPlaces} ></Route>
 <Route exact path='/places/new' Component={NewPlaces}></Route>
 <Route exact path='/places/:placeId' Component={UpdatePlace}></Route>
+<Route exact path='/auth' Component={UserAuth}></Route>
     </Routes>
     </main>
     <redirect exact from="/" to={User} />
