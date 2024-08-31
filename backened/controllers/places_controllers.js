@@ -20,25 +20,25 @@ let DUMMY_PLACES = [
 const getPlaceById = (req,res,next)=>{
     const placeId = req.params.pid;
     console.log('get request');
-    const place = DUMMY_PLACES.find((p)=>{
+    const place = DUMMY_PLACES.find(p=>{
         return p.id === placeId
     })
     if(!place){
-        throw new HttpError('Could not find a place for the provided id',404);
+        throw new HttpError('Could not find a places for the provided id',404);
     }
     res.json({place});
 }
 
-const getPlaceByUserId = (req,res,next)=>{
+const getPlacesByUserId = (req,res,next)=>{
     const userid = req.params.uid;
-    const place = DUMMY_PLACES.find(p=>{
-        return p.creator === userid
-    })
-    if(!place){
-        return next( new HttpError('Could not find a place for the provided uesr id',404));   
+    const places = DUMMY_PLACES.filter(p=>{
+        return p.creator === userid;
+    });
+    if(!places || places.length===0){
+        return next( new HttpError('Could not find a place for the provided user id',404));   
     }
     
-    res.json({place})
+    res.json({places})
 };
 
 
@@ -81,7 +81,7 @@ const deletePlace = (req,res,next)=>{
 
 
 exports.getPlaceById = getPlaceById;
-exports.getPlaceByUserId = getPlaceByUserId
+exports.getPlacesByUserId = getPlacesByUserId
 exports.createPlace = createPlace
 exports.updatePlace = updatePlace;
 exports.deletePlace = deletePlace;
